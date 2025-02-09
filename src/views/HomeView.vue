@@ -16,8 +16,8 @@
           <p class="todo-title" :class="{completed: todo.completed}" >{{ todo.title }}</p>
         </div>
        <div class="todo-item-left">
-          <button class="btn-delete">Delete</button>
-          <button class="btn-edit">Edit</button>
+        <button class="btn-delete" @click="deleteTodo(todo.id)">Delete</button>
+          <button class="btn-edit" @click="editTodo(todo.id)">Edit</button>
        </div>
       </div>
     </div>
@@ -50,6 +50,18 @@ title.velue="";
   todo.completed = !todo.completed;
  
  };
+ const deleteTodo = (id) => {
+  todos.value = todos.value.filter((todo) => todo.id !== id);
+};
+
+const editTodo = (id) => {
+  const todo = todos.value.find((todo) => todo.id === id);
+  if (todo) {
+    title.value = todo.title;
+    deleteTodo(id);
+  }
+};
+
 </script>
 <style>
   main{
